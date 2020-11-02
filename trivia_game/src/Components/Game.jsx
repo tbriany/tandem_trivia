@@ -9,6 +9,11 @@ function Game() {
     const [currQindex, setCurrQindex] = useState(0)
     const [currQ, setCurrQ] = useState(tenQuestions[currQindex])
 
+    const getNextQuestion = () => {
+        setCurrQindex(currQindex + 1)
+        setCurrQ(tenQuestions[currQindex + 1])
+    }
+
     return (
         <div className="Game">
             <h1>Game Started!</h1>
@@ -17,6 +22,7 @@ function Game() {
                 incorrect={currQ.incorrect}
                 correct={currQ.correct}
             />
+            <button onClick={getNextQuestion}>Next Question</button>
         </div>
     );
 }
