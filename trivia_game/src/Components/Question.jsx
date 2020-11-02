@@ -4,7 +4,7 @@ import '../App.css'
 
 function Question(props) {
 
-    const { question, correct, incorrect, score, setScore, questionAnswered, setQuestionAnswered } = props
+    const { index, question, correct, incorrect, score, setScore, questionAnswered, setQuestionAnswered } = props
     const [answers, setAnswers] = useState([])
     const [selectedAnswer, setSelectedAnswer] = useState("")
     const [correctAnswer, setCorrectAnswer] = useState("")
@@ -45,7 +45,7 @@ function Question(props) {
 
     return (
         <div className="Question">
-            <h3>{question}</h3>
+            <h3>{index + 1}. {question}</h3>
             <p>{correctAnswer}</p>
             <form onSubmit={listenToForm} >
                 {answerArr}
