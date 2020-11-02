@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import '../App.css'
 import questions from '../json/Apprentice_TandemFor400_Data.json'
 import Question from './Question'
@@ -32,8 +32,7 @@ function Game() {
 
     return (
         <div className="Game">
-            <h1>Game Started!</h1>
-            <p>Score: {score}/10</p>
+            <h4 className="score">Score: {score}/10</h4>
             <div>
                 {gameOver
                     ?

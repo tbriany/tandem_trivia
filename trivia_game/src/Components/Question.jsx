@@ -34,7 +34,7 @@ function Question(props) {
 
     const answerArr = answers.map((answer) => {
         return (
-            <div key={answer}>
+            <div key={answer} className="answer">
                 <label>
                     <input type="radio" onClick={listenToBtn} name="chosenAnswer" value={answer} />
                     {answer}
@@ -47,7 +47,7 @@ function Question(props) {
         <div className="Question">
             <h3>{index + 1}. {question}</h3>
             <p>{correctAnswer}</p>
-            <form onSubmit={listenToForm} >
+            <form onSubmit={listenToForm}>
                 {answerArr}
                 {
                     !questionAnswered
