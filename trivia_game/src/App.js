@@ -12,7 +12,7 @@ function App() {
         ? <Game />
         : 
         <div>
-        <h1>Welcome to Trivia!!</h1>
+        <h1>Welcome to Tandem Trivia!!</h1>
         <button onClick={prevState => setgameStarted(true)}>Start Game</button> 
         </div>
       }
