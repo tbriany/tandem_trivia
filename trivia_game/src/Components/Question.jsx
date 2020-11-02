@@ -7,10 +7,12 @@ function Question(props) {
     const { question, correct, incorrect, score, setScore, questionAnswered, setQuestionAnswered } = props
     const [answers, setAnswers] = useState([])
     const [selectedAnswer, setSelectedAnswer] = useState("")
+    const [correctAnswer, setCorrectAnswer] = useState("")
 
 
     useEffect(() => {
         setAnswers([...incorrect, correct].sort(() => 0.5 - Math.random()))
+        setCorrectAnswer("")
         setQuestionAnswered(false)
     }, [incorrect, correct, setQuestionAnswered])
 
@@ -23,6 +25,8 @@ function Question(props) {
         event.preventDefault()
         if (selectedAnswer === correct) {
             setScore(score + 1)
+        } else {
+            setCorrectAnswer(`Correct Answer: ${correct}`)
         }
         setQuestionAnswered(true)
     }
@@ -42,6 +46,7 @@ function Question(props) {
     return (
         <div className="Question">
             <h3>{question}</h3>
+            <p>{correctAnswer}</p>
             <form onSubmit={listenToForm} >
                 {answerArr}
                 {
