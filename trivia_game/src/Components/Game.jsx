@@ -10,27 +10,41 @@ function Game() {
     const [currQ, setCurrQ] = useState(tenQuestions[currQindex])
     const [score, setScore] = useState(0)
     const [questionAnswered, setQuestionAnswered] = useState(false)
+    const [gameOver, setGameOver] = useState(false)
 
 
     const getNextQuestion = () => {
-        setCurrQindex(currQindex + 1)
-        setCurrQ(tenQuestions[currQindex + 1])
+        if (currQindex >= 9) {
+            setGameOver(true)
+        } else {
+            setCurrQindex(currQindex + 1)
+            setCurrQ(tenQuestions[currQindex + 1])
+        }
     }
 
     return (
         <div className="Game">
             <h1>Game Started!</h1>
             <p>Score: {score}/10</p>
-            <Question
-                question={currQ.question}
-                incorrect={currQ.incorrect}
-                correct={currQ.correct}
-                score={score}
-                setScore={setScore}
-                questionAnswered={questionAnswered}
-                setQuestionAnswered={setQuestionAnswered}
-            />
-            {questionAnswered 
+            <div>
+                {gameOver
+                    ? 
+                    <div>
+                      <h3>Game Over!</h3> 
+                    </div>
+                    :
+                    <Question
+                        question={currQ.question}
+                        incorrect={currQ.incorrect}
+                        correct={currQ.correct}
+                        questionAnswered={questionAnswered}
+                        setQuestionAnswered={setQuestionAnswered}
+                        score={score}
+                        setScore={setScore}
+                    />
+                }
+            </div>
+            {questionAnswered && !gameOver
                 ? <button onClick={getNextQuestion}>Next Question</button>
                 : <></>
             }
