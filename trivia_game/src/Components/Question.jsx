@@ -6,16 +6,29 @@ function Question(props) {
 
     const { question, correct, incorrect } = props
     const [answers, setAnswers] = useState([])
+    const [selectedAnswer, setSelectedAnswer] = useState("")
+
 
     useEffect(() => {
         setAnswers([...incorrect, correct].sort(() => 0.5 - Math.random()))
     }, [incorrect, correct])
 
+    
+    const listenToBtn = (event) => {
+        setSelectedAnswer(event.target.value)
+    }
+
+    const listenToForm = (event) => {
+        event.preventDefault()
+        console.log('answered submitted')
+    }
+
+
     const answerArr = answers.map((answer) => {
         return (
             <div key={answer}>
                 <label>
-                    <input type="radio" name="chosenAnswer" value={answer} />
+                <input type="radio" onClick={listenToBtn} name="chosenAnswer" value={answer} />
                     {answer}
                 </label>
             </div>
@@ -25,8 +38,9 @@ function Question(props) {
     return (
         <div className="Question">
             <h3>{question}</h3>
-            <form >
+            <form onSubmit={listenToForm} >
                 {answerArr}
+                <button>Submit</button>
             </form>
         </div>
     );
