@@ -22,18 +22,29 @@ function Game() {
         }
     }
 
+    const startOver = () => {
+        setTenQuestions(questions.sort(() => 0.5 - Math.random()).slice(0, 10))
+        setCurrQindex(0)
+        setGameOver(false)
+        setScore(0)
+    }
+
+
     return (
         <div className="Game">
             <h1>Game Started!</h1>
             <p>Score: {score}/10</p>
             <div>
                 {gameOver
-                    ? 
+                    ?
                     <div>
-                      <h3>Game Over!</h3> 
+                        <h3>Game Over!</h3>
+                        <p>Your Score was: {score}</p>
+                        <button onClick={startOver}>Start Over</button>
                     </div>
                     :
                     <Question
+                        index={currQindex}
                         question={currQ.question}
                         incorrect={currQ.incorrect}
                         correct={currQ.correct}
