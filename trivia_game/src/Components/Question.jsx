@@ -4,16 +4,17 @@ import '../App.css'
 
 function Question(props) {
 
-    const { question, correct, incorrect, score, setScore} = props
+    const { question, correct, incorrect, score, setScore, questionAnswered, setQuestionAnswered } = props
     const [answers, setAnswers] = useState([])
     const [selectedAnswer, setSelectedAnswer] = useState("")
 
 
     useEffect(() => {
         setAnswers([...incorrect, correct].sort(() => 0.5 - Math.random()))
-    }, [incorrect, correct])
+        setQuestionAnswered(false)
+    }, [incorrect, correct, setQuestionAnswered])
 
-    
+
     const listenToBtn = (event) => {
         setSelectedAnswer(event.target.value)
     }
@@ -23,6 +24,7 @@ function Question(props) {
         if (selectedAnswer === correct) {
             setScore(score + 1)
         }
+        setQuestionAnswered(true)
     }
 
 
@@ -30,7 +32,7 @@ function Question(props) {
         return (
             <div key={answer}>
                 <label>
-                <input type="radio" onClick={listenToBtn} name="chosenAnswer" value={answer} />
+                    <input type="radio" onClick={listenToBtn} name="chosenAnswer" value={answer} />
                     {answer}
                 </label>
             </div>
@@ -42,7 +44,11 @@ function Question(props) {
             <h3>{question}</h3>
             <form onSubmit={listenToForm} >
                 {answerArr}
-                <button>Submit</button>
+                {
+                    !questionAnswered
+                        ? <button>Submit</button>
+                        : <></>
+                }
             </form>
         </div>
     );

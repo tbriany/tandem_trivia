@@ -9,6 +9,7 @@ function Game() {
     const [currQindex, setCurrQindex] = useState(0)
     const [currQ, setCurrQ] = useState(tenQuestions[currQindex])
     const [score, setScore] = useState(0)
+    const [questionAnswered, setQuestionAnswered] = useState(false)
 
 
     const getNextQuestion = () => {
@@ -26,8 +27,13 @@ function Game() {
                 correct={currQ.correct}
                 score={score}
                 setScore={setScore}
+                questionAnswered={questionAnswered}
+                setQuestionAnswered={setQuestionAnswered}
             />
-            <button onClick={getNextQuestion}>Next Question</button>
+            {questionAnswered 
+                ? <button onClick={getNextQuestion}>Next Question</button>
+                : <></>
+            }
         </div>
     );
 }
