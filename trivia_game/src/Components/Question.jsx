@@ -4,7 +4,7 @@ import '../App.css'
 
 function Question(props) {
 
-    const { question, correct, incorrect } = props
+    const { question, correct, incorrect, score, setScore} = props
     const [answers, setAnswers] = useState([])
     const [selectedAnswer, setSelectedAnswer] = useState("")
 
@@ -20,7 +20,9 @@ function Question(props) {
 
     const listenToForm = (event) => {
         event.preventDefault()
-        console.log('answered submitted')
+        if (selectedAnswer === correct) {
+            setScore(score + 1)
+        }
     }
 
 
